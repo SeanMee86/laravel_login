@@ -88,7 +88,9 @@ class TodosController extends Controller
      */
     public function update(Request $request, Todos $todos)
     {
-        //
+        if(isset (Auth::user()->id)){
+
+        }
     }
 
     /**

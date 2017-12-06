@@ -26,3 +26,5 @@ Route::get('/todos/add', function(){
 });
 
 Route::post('/todos/add', 'TodosController@store');
+
+Route::put('/todos/add', 'TodosController@update');

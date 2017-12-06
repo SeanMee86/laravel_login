@@ -10,8 +10,24 @@
                     <div class="panel-body">
                     @foreach($todos as $todo)
                         <div class="todo" style="margin: 20px;">
-                            {{$todo->todos}} - @if($todo->is_complete) Completed <button class="btn btn-danger is_complete" style="float: right;">Delete</button><button class="btn btn-warning is_complete" style="float: right; margin-right: 20px;">ReOpen</button>
-                            @else Not Completed <button class="btn btn-success is_complete" style="float: right;">Complete</button> @endif
+                            {{$todo->todos}} - @if($todo->is_complete) Completed <button
+                                                                                    class="btn btn-danger delete"
+                                                                                    style="float: right;" todo_id="{{$todo->id}}">
+                                                                                        Delete
+                                                                                </button>
+
+                                                                                <button
+                                                                                    class="btn btn-warning reopen"
+                                                                                    style="float: right; margin-right: 20px;" todo_id="{{$todo->id}}">
+                                                                                        ReOpen
+                                                                                </button>
+
+                            @else Not Completed <button
+                                                    class="btn btn-success complete"
+                                                    style="float: right;" todo_id="{{$todo->id}}">
+                                                        Complete
+                                                </button>
+                            @endif
                         </div>
                     @endforeach
                     <a href="/todos/add"><button class="btn btn-primary" style="margin: 20px;">Add Todo</button></a>
