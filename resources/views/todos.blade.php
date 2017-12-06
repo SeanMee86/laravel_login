@@ -7,11 +7,15 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Dashboard</div>
-                    @foreach($todos as $todo)
                     <div class="panel-body">
-                        {{$todo->todos}} - @if($todo->is_complete) Completed @else Not Completed @endif <div class="btn btn-info is_complete">Done</div>
-                    </div>
+                    @foreach($todos as $todo)
+                        <div class="todo" style="margin: 20px;">
+                            {{$todo->todos}} - @if($todo->is_complete) Completed <button class="btn btn-danger is_complete" style="float: right;">Delete</button><button class="btn btn-warning is_complete" style="float: right; margin-right: 20px;">ReOpen</button>
+                            @else Not Completed <button class="btn btn-success is_complete" style="float: right;">Done</button> @endif
+                        </div>
                     @endforeach
+                    <a href="/todos/add"><button class="btn btn-primary" style="margin: 20px;">Add Todo</button></a>
+                    </div>
                 </div>
             </div>
         </div>

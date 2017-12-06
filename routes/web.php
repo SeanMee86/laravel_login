@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/todos', 'TodosController@show');
+
+Route::get('/todos/add', function(){
+    return view('add_todos');
+});
+
+Route::post('/todos/add', 'TodosController@store');

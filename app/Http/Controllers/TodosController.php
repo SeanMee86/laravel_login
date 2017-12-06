@@ -36,7 +36,21 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(isset(Auth::user()->id)){
+            $this->validate($request, [
+                'todo' => 'required'
+            ]);
+
+            $todo = new Todos;
+
+            $todo->todos = $request->input('todo');
+            $todo->is_complete = false;
+            $todo->user_id = Auth::user()->id;
+
+            $todo->save();
+
+            return redirect('/todos');
+        }
     }
 
     /**
