@@ -11,7 +11,7 @@
                     @foreach($todos as $todo)
                         <div class="todo" style="margin: 20px;">
                             {{$todo->todos}} - @if($todo->is_complete) Completed <button class="btn btn-danger is_complete" style="float: right;">Delete</button><button class="btn btn-warning is_complete" style="float: right; margin-right: 20px;">ReOpen</button>
-                            @else Not Completed <button class="btn btn-success is_complete" style="float: right;">Done</button> @endif
+                            @else Not Completed <button class="btn btn-success is_complete" style="float: right;">Complete</button> @endif
                         </div>
                     @endforeach
                     <a href="/todos/add"><button class="btn btn-primary" style="margin: 20px;">Add Todo</button></a>
