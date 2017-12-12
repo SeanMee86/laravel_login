@@ -19,6 +19,7 @@
                             {!! Form::close() !!}
 
                             {!! Form::open(['url' => '/todos/add/', 'method' => 'delete', 'style' => 'display: inline;']) !!}
+                            {!! Form::hidden('todo_id', $todo->id) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
 

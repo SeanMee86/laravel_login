@@ -107,8 +107,15 @@ class TodosController extends Controller
      * @param  \App\Todos  $todos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todos $todos)
+    public function destroy(Request $request, Todos $todos)
     {
-        //
+        if(isset (Auth::user()->id)){
+
+            $todos = Todos::findOrFail($request->input('todo_id'));
+
+            $todos->delete();
+
+            return redirect('/todos');
+        }
     }
 }
