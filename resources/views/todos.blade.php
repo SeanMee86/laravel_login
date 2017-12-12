@@ -10,23 +10,26 @@
                     <div class="panel-body">
                     @foreach($todos as $todo)
                         <div class="todo" style="margin: 20px;">
-                            {{$todo->todos}} - @if($todo->is_complete) Completed <button
-                                                                                    class="btn btn-danger delete"
-                                                                                    style="float: right;" todo_id="{{$todo->id}}">
-                                                                                        Delete
-                                                                                </button>
+                            {{$todo->todos}} - @if($todo->is_complete) Completed
 
-                                                                                <button
-                                                                                    class="btn btn-warning reopen"
-                                                                                    style="float: right; margin-right: 20px;" todo_id="{{$todo->id}}">
-                                                                                        ReOpen
-                                                                                </button>
+                            {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
+                            {!! Form::hidden('is_complete', '0') !!}
+                            {!! Form::hidden('todo_id', $todo->id) !!}
+                            {!! Form::submit('Re-Open', ['class' => 'btn btn-warning']) !!}
+                            {!! Form::close() !!}
 
-                            @else Not Completed <button
-                                                    class="btn btn-success complete"
-                                                    style="float: right;" todo_id="{{$todo->id}}">
-                                                        Complete
-                                                </button>
+                            {!! Form::open(['url' => '/todos/add/', 'method' => 'delete', 'style' => 'display: inline;']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::close() !!}
+
+                            @else Not Completed
+
+                            {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
+                            {!! Form::hidden('is_complete', '1') !!}
+                            {!! Form::hidden('todo_id', $todo->id) !!}
+                            {!! Form::submit('Complete', ['class' => 'btn btn-success']) !!}
+                            {!! Form::close() !!}
+
                             @endif
                         </div>
                     @endforeach

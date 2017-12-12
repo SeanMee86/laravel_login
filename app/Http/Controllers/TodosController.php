@@ -89,7 +89,15 @@ class TodosController extends Controller
     public function update(Request $request, Todos $todos)
     {
         if(isset (Auth::user()->id)){
+            $todo_id = $request->input('todo_id');
+            $is_complete = $request->input('is_complete');
 
+            $todos = Todos::findOrFail($todo_id);
+            $todos->is_complete = $is_complete;
+
+            $todos->save();
+
+            return redirect('/todos');
         }
     }
 
