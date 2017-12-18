@@ -9,9 +9,9 @@
                     <div class="panel-heading">Dashboard</div>
                     <div class="panel-body">
                     @foreach($todos as $todo)
-                        <div class="todo" style="margin: 20px;">
-                            {{$todo->todos}} - @if($todo->is_complete) Completed
-
+                        <div class="todo">
+                            {{$todo->todos}} - @if($todo->is_complete) <strong>Completed</strong>
+                        <div class="buttons">
                             {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
                             {!! Form::hidden('is_complete', '0') !!}
                             {!! Form::hidden('todo_id', $todo->id) !!}
@@ -22,19 +22,24 @@
                             {!! Form::hidden('todo_id', $todo->id) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
+                        </div>
 
-                            @else Not Completed
-
+                            @else <strong>Not Completed</strong>
+                        <div class="buttons">
                             {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
                             {!! Form::hidden('is_complete', '1') !!}
                             {!! Form::hidden('todo_id', $todo->id) !!}
                             {!! Form::submit('Complete', ['class' => 'btn btn-success']) !!}
                             {!! Form::close() !!}
+                        </div>
 
+                            @endif
+                            @if (!$loop->last)
+                            <hr>
                             @endif
                         </div>
                     @endforeach
-                    <a href="/todos/add"><button class="btn btn-primary" style="margin: 20px;">Add Todo</button></a>
+                    <a href="/todos/add"><button class="btn btn-primary add-todo">Add Todo</button></a>
                     </div>
                 </div>
             </div>

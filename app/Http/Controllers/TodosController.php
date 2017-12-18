@@ -59,12 +59,14 @@ class TodosController extends Controller
      * @param  \App\Todos  $todos
      * @return \Illuminate\Http\Response
      */
-    public function show(Todos $todos)
+    public function show()
     {
+
         if(isset(Auth::user()->id)) {
             $todos = Todos::all()->where('user_id', '=', Auth::user()->id);
             return view('todos')->with('todos', $todos);
         }
+
         return redirect('login');
     }
 
@@ -86,16 +88,22 @@ class TodosController extends Controller
      * @param  \App\Todos  $todos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todos $todos)
+    public function update(Request $request)
     {
         if(isset (Auth::user()->id)){
+
             $todo_id = $request->input('todo_id');
             $is_complete = $request->input('is_complete');
 
-            $todos = Todos::findOrFail($todo_id);
-            $todos->is_complete = $is_complete;
+            $todo = Todos::findOrFail($todo_id);
+            $current_user = $todo->user_id;
 
-            $todos->save();
+            if($current_user !== Auth::user()->id){
+                return view('denied');
+            }
+
+            $todo->is_complete = $is_complete;
+            $todo->save();
 
             return redirect('/todos');
         }
@@ -107,13 +115,16 @@ class TodosController extends Controller
      * @param  \App\Todos  $todos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Todos $todos)
+    public function destroy(Request $request)
     {
         if(isset (Auth::user()->id)){
 
-            $todos = Todos::findOrFail($request->input('todo_id'));
-
-            $todos->delete();
+            $todo = Todos::findOrFail($request->input('todo_id'));
+            $current_user = $todo->user_id;
+            if($current_user !== Auth::user()->id){
+                return view('denied');
+            }
+            $todo->delete();
 
             return redirect('/todos');
         }
