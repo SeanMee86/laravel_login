@@ -9,6 +9,8 @@
                 <div class="form-group">
                     {!! Form::label('todo', 'New Todo') !!}
                     {!! Form::text('todo', '', ['class' => 'form-control', 'placeholder' => 'New Todo']) !!}
+                    <br>
+                    {!! Form::date('deadline', '', ['class' => 'form-control date-input']) !!}
                 </div>
                 <div>
                     {!! Form::submit('Submit', ['class' => 'btn btn-primary col-lg-3']) !!}

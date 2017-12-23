@@ -17,6 +17,7 @@ class CreateTodosTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('todos');
+            $table->date('deadline');
             $table->boolean('is_complete');
             $table->timestamps();
         });

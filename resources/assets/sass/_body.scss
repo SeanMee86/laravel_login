@@ -1,3 +1,13 @@
 .todo {
   margin: 32px 20px;
 }
+
+.due_by {
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.form-group .form-control.date-input {
+  width: 33%;
+}

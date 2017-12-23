@@ -10,7 +10,7 @@
                     <div class="panel-body">
                     @foreach($todos as $todo)
                         <div class="todo">
-                            {{$todo->todos}} - @if($todo->is_complete) <strong>Completed</strong>
+                            {{$todo->todos}} @if($todo->is_complete) - <strong>Completed</strong>
                         <div class="buttons">
                             {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
                             {!! Form::hidden('is_complete', '0') !!}
@@ -24,7 +24,7 @@
                             {!! Form::close() !!}
                         </div>
 
-                            @else <strong>Not Completed</strong>
+                            @else <span class="due_by">*Due by {{date('m-d-Y', strtotime($todo->deadline))}}*</span> - <strong>Not Completed</strong>
                         <div class="buttons">
                             {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
                             {!! Form::hidden('is_complete', '1') !!}
@@ -47,3 +47,4 @@
     </div>
 
 @endsection
+

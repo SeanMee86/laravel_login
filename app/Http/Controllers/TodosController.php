@@ -38,12 +38,14 @@ class TodosController extends Controller
     {
         if(isset(Auth::user()->id)){
             $this->validate($request, [
-                'todo' => 'required'
+                'todo' => 'required',
+                'deadline' => 'required'
             ]);
 
             $todo = new Todos;
 
             $todo->todos = $request->input('todo');
+            $todo->deadline = $request->input('deadline');
             $todo->is_complete = false;
             $todo->user_id = Auth::user()->id;
 

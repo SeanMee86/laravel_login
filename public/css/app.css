@@ -20,6 +20,16 @@
   margin: 32px 20px;
 }
 
+.due_by {
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.form-group .form-control.date-input {
+  width: 33%;
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
