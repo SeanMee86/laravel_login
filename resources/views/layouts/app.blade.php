@@ -12,6 +12,41 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+
+        $(document).ready(function(){
+          todoClick();
+        });
+
+      function todoClick() {
+        $('.todo').on('click', function(){
+          const text = this.childNodes[0];
+          console.dir(this);
+          todoEdit(text);
+        })
+      }
+
+      function todoEdit(text) {
+        $(text).focusout(function(){
+          $.ajax({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/todos/add',
+            method: 'PUT',
+            data: {
+              'updateTodo': text.innerText,
+              'todo_id': text.attributes[0].value
+            },
+            success: function(){
+              console.log('entry updated todo id is ' + text.attributes[0].value);
+            }
+          })
+        })
+      }
+
+    </script>
 </head>
 <body>
     <div id="app">

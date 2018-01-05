@@ -10,7 +10,7 @@
                     <div class="panel-body">
                     @foreach($todos as $todo)
                         <div class="todo">
-                            {{$todo->todos}} @if($todo->is_complete) - <strong>Completed</strong>
+                            <span todoId="{{$todo->id}}" contenteditable="true">{{$todo->todos}}</span> @if($todo->is_complete) - <strong>Completed</strong>
                         <div class="buttons">
                             {!! Form::open(['url' => '/todos/add/', 'method' => 'put', 'style' => 'display: inline;']) !!}
                             {!! Form::hidden('is_complete', '0') !!}

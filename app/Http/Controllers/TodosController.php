@@ -92,22 +92,37 @@ class TodosController extends Controller
      */
     public function update(Request $request)
     {
-        if(isset (Auth::user()->id)){
+        if(isset(Auth::user()->id)){
 
-            $todo_id = $request->input('todo_id');
-            $is_complete = $request->input('is_complete');
 
-            $todo = Todos::findOrFail($todo_id);
-            $current_user = $todo->user_id;
+            $data = $request->all();
 
-            if($current_user !== Auth::user()->id){
-                return view('denied');
+            if(isset($data['updateTodo'])){
+                $todo_id = $data['todo_id'];
+
+                $todo = Todos::findOrFail($todo_id);
+                $todo->todos = $data['updateTodo'];
+                $todo->save();
+                print_r($todo);
+            }else {
+                $todo_id = $request->input('todo_id');
+
+                $todo = Todos::findOrFail($todo_id);
+
+                $is_complete = $request->input('is_complete');
+
+
+                $current_user = $todo->user_id;
+
+                if ($current_user !== Auth::user()->id) {
+                    return view('denied');
+                }
+
+                $todo->is_complete = $is_complete;
+                $todo->save();
+
+                return redirect('/todos');
             }
-
-            $todo->is_complete = $is_complete;
-            $todo->save();
-
-            return redirect('/todos');
         }
     }
 
